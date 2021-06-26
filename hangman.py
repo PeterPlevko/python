@@ -1,0 +1,78 @@
+import random
+import sys
+def listToString(s):
+    # initialize an empty string
+    str1 = ""
+
+    # traverse in the string
+    for ele in s:
+        str1 += ele
+
+        # return string
+    return str1
+# Write your code here
+list_words = ['python', 'java', 'kotlin', 'javascript']
+random_int = random.randint(0, 3)
+
+while True:
+    print('Type "play" to play the game, "exit" to quit: > play')
+    user_input = input()
+    if user_input == "play":
+        break
+    if user_input == "exit":
+        raise SystemExit(0)
+
+print("H A N G M A N\n")
+quess_word = list(list_words[random_int])
+x = "-" * len(quess_word)
+j = 0
+
+typed_letter = ""
+while j < 8:
+    print(listToString(x))
+
+    while True:
+
+        letter = input("Input a letter: ")
+        if len(letter) > 1:
+            print("You should input a single letter\n")
+            print(listToString(x))
+            print
+        elif letter not in "abcdefghijklmnopqrstuvwxyz":
+            print("It is not an ASCII lowercase letter\n")
+            print(listToString(x))
+            print
+
+
+        else:
+            break
+
+    x = list(x)
+    if letter in typed_letter:
+        #j += 1
+        #if j == 8:
+           # print("You already typed this letter")
+            #print("You are hanged!")
+        #else:
+        print("You already typed this letter\n")
+    elif letter in quess_word:
+        print()
+        indices = [i for i, x in enumerate(quess_word) if x == letter]
+        for i in indices:
+            x[i] = letter
+    else:
+        j += 1
+        if j == 8:
+            print("No such letter in the word")
+            print("You are hanged!")
+        else:
+            print("No such letter in the word\n")
+    typed_letter += letter
+    if x == quess_word:
+        print(listToString(x))
+        print("You have quessed the word!")
+        print("You survived!")
+        break
+
+
+
